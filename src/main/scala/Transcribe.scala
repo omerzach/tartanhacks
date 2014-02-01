@@ -14,22 +14,20 @@ object Transcriber {
       // TODO: Exit
     }
 
-    val configManager = new ConfigurationManager(args(0))
+    val configManager: ConfigManager = new ConfigManager(args(0))
     println(args(0))
  
-    //val grammar: TextAlignerGrammar = new TextAlignerGrammar
-    val x: java.lang.String = "textAlignGrammar"
-    val grammar: TextAlignerGrammar = configManager.lookup(x)//"textAlignGrammar"/*classOf[TextAlignerGrammar]*/)
-    //println(grammar)
+    val grammar: TextAlignerGrammar = configManager.lookup("textAlignGrammar").asInstanceOf[TextAlignerGrammar]
     grammar.setText("hello world")
 
-    val recognizer: Recognizer = new Recognizer //configManager.lookup(classOf[Recognizer])
+    val recognizer: Recognizer = configManager.lookup("recognizer").asInstanceOf[Recognizer]
     recognizer.addResultListener(grammar)
     recognizer.allocate
 
-    val dataSource: AudioFileDataSource = configManager.lookup(classOf[AudioFileDataSource]);
+    val dataSource: AudioFileDataSource = configManager.lookup("audioFileDataSource").asInstanceOf[AudioFileDataSource];
     dataSource.setAudioFile(new URL("file:resources/hello-world.wav"), null);
 
+/*
     var result: Result = null
 
     @tailrec 
@@ -44,6 +42,7 @@ object Transcriber {
     }
 
     outputResults()
+*/
 
     println("Testing")
   }
