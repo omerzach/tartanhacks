@@ -8,7 +8,7 @@ def runDownloader(downloadLinks):
 	fp.close()
 	print "hoola"
 	for link in contents:
-		command = "youtube-dl " + link + " --verbose --extract-audio --audio-format mp3"
+		command = "youtube-dl " + link + " --verbose --extract-audio --audio-format mp3 --write-sub"
 		subprocess.call(command.split(" "))
 
 runDownloader("links.txt")
