@@ -1,5 +1,14 @@
 import os
 
+def timing(timestamp):
+	split = timestamp.split(':')
+	hours = int(split[0].strip())
+	minutes = int(split[1].strip())
+	seconds = int(split[2].split(',')[0].strip())
+	milliseconds = int(split[2].split(',')[1].strip())
+	return hours, minutes, seconds, milliseconds
+	
+
 def processSubsection(lines, lineNumber):
 	section = int(lines[lineNumber -1].strip())
 	index = lineNumber + 1
@@ -9,10 +18,17 @@ def processSubsection(lines, lineNumber):
 			break;
 		subtitle = subtitle + " %s "  % (lines[index].strip())
 		index += 1
+	if ('[Applause]' in subtitle):
+		return
 	if ('--' in subtitle):
 		subtitle = subtitle.replace("--", "")
+	
 
-	print section, subtitle
+	timings = []
+	timings.append(timing(lines[lineNumber].split(' --> ')[0].strip()))
+	
+	timings.append(timing(lines[lineNumber].split(' --> ')[1].strip()))
+	print section, subtitle, timings
 	return
 		
 		
