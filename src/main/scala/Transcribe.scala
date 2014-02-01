@@ -4,6 +4,7 @@ import edu.cmu.sphinx.linguist.language.grammar.TextAlignerGrammar
 import edu.cmu.sphinx.recognizer.Recognizer
 import edu.cmu.sphinx.result.Result
 import edu.cmu.sphinx.util.props.ConfigurationManager
+import java.io.File
 import java.net.URL
 import scala.annotation.tailrec
 
@@ -24,8 +25,9 @@ object Transcriber {
     recognizer.addResultListener(grammar)
     recognizer.allocate
 
-    val dataSource: AudioFileDataSource = configManager.lookup("audioFileDataSource").asInstanceOf[AudioFileDataSource];
-    dataSource.setAudioFile(new URL("file:resources/hello-world.wav"), null);
+    val dataSource: AudioFileDataSource = configManager.lookup("audioFileDataSource").asInstanceOf[AudioFileDataSource]
+    println(new URL("file:/Users/omerzach/Dropbox/tartanhacks/resources/10001-90210-01803.wav"))
+    dataSource.setAudioFile(new URL("file:/Users/omerzach/Dropbox/tartanhacks/resources/10001-90210-01803.wav"), null)
 
 /*
     var result: Result = null
